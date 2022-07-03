@@ -28,6 +28,8 @@ endif::[]
 
 IMPORTANT: Usually, constraints such as the one for temperatures are discussed and determined *with the customer*. For the purpose of this challenge, we skip that step and determine the temperatures based on the Wikipedia page for https://de.wikipedia.org/w/index.php?title=Temperaturextrema&oldid=221928598[Temperature Extremes] and add an offset of stem:[\pm10 \texttt{°C}].
 
+NOTE: We checked out the original dataset and fixed a typo in a column name of the weather dataset ("MnR"). Furthermore, we identified an empty row which was combined with another column to a single column in the CSV ("1Hrp" + "TPcpn")
+
 
 === Football Dataset
 
@@ -43,7 +45,7 @@ We divide the challenge in following tasks:
 * Model the data
 * Add feature to calculated difference
 * Add reader for CSV
-* Add feature to identify record with smallest difference
+* Add feature to identify record with the smallest difference
 
 === Football Challenge
 
