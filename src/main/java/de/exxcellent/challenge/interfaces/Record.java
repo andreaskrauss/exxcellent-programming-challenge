@@ -6,6 +6,13 @@ package de.exxcellent.challenge.interfaces;
  */
 public interface Record {
 
+    /**
+     * @return identifier of a record
+     */
     String getId();
+
+    /**
+     * @return the absolute difference between a records attributes
+     */
     int getDifference();
 }

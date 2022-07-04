@@ -15,6 +15,11 @@ public class RecordCollection {
         this.records = records;
     }
 
+    /**
+     * Search the record with the minimum difference of its attributes in the total List of records.
+     *
+     * @return id of the searched record
+     */
     public String getRecordWithMinimalDifference(){
         int minDifference = Integer.MAX_VALUE;
         Record identifiedRecord = null;

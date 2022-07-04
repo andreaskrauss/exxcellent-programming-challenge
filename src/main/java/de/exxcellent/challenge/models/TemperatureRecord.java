@@ -4,6 +4,7 @@ import de.exxcellent.challenge.interfaces.Record;
 
 /**
  * Temperature record to store day and daily min and max Temperature
+ *
  * @author Andreas Krauss <am.krauss@web.de>
  */
 public class TemperatureRecord implements Record {
@@ -11,8 +12,11 @@ public class TemperatureRecord implements Record {
     private final int minTemperature;
     private final int maxTemperature;
 
+    /**
+     * The following variables define the constraints for accepting temperatures in Fahrenheit
+     */
     private final static int lowerTemperatureLimit = -148;
-    private final static int upperTemperatureLimit =  153;
+    private final static int upperTemperatureLimit = 153;
 
     public TemperatureRecord(int day, int minTemperature, int maxTemperature) {
         if (!validateTemperatureLimits(minTemperature, maxTemperature))
@@ -24,20 +28,24 @@ public class TemperatureRecord implements Record {
         this.maxTemperature = maxTemperature;
     }
 
-    private boolean validateTemperatureLimits(int minTemperature, int maxTemperature){
-        if (minTemperature < lowerTemperatureLimit){ return false; }
-        if (minTemperature > upperTemperatureLimit){ return false; }
-        if (maxTemperature < lowerTemperatureLimit){ return false; }
-        if (maxTemperature > upperTemperatureLimit){ return false; }
+    private boolean validateTemperatureLimits(int minTemperature, int maxTemperature) {
+        if (minTemperature < lowerTemperatureLimit) {
+            return false;
+        }
+        if (minTemperature > upperTemperatureLimit) {
+            return false;
+        }
+        if (maxTemperature < lowerTemperatureLimit) {
+            return false;
+        }
+        if (maxTemperature > upperTemperatureLimit) {
+            return false;
+        }
         return true;
     }
 
-    private boolean validateTemperatureValues(int minTemperature, int maxTemperature){
+    private boolean validateTemperatureValues(int minTemperature, int maxTemperature) {
         return minTemperature <= maxTemperature;
-    }
-
-    public String getId() {
-        return Integer.toString(this.day);
     }
 
     public int getMinTemperature() {
@@ -48,8 +56,19 @@ public class TemperatureRecord implements Record {
         return this.maxTemperature;
     }
 
+    /**
+     * @return A String representing the day in a month
+     */
+    @Override
+    public String getId() {
+        return Integer.toString(this.day);
+    }
+
+    /**
+     * @return The absolute difference between a records minimum and maximum temperature
+     */
     @Override
     public int getDifference() {
-        return Math.abs(this.maxTemperature-this.minTemperature);
+        return Math.abs(this.maxTemperature - this.minTemperature);
     }
 }

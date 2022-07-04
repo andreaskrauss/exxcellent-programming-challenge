@@ -14,10 +14,13 @@ import java.util.List;
 
 /**
  * Reader to create records from CSV files.
+ *
  * @author Andreas Krauss <am.krauss@web.de>
  */
 public class CSVRecordReader implements RecordReader {
-    public CSVRecordReader(){ }
+    public CSVRecordReader() {
+    }
+
     @Override
     public List<Record> readRecords(String filepath, String type) {
         filepath = "de/exxcellent/challenge/" + filepath;
@@ -32,18 +35,16 @@ public class CSVRecordReader implements RecordReader {
             while (line != null) {
 
                 String[] attributes = line.split(",");
-                if (type.contains("weather"))
-                {
-                    int id              = Integer.parseInt(attributes[Arrays.asList(header).indexOf("Day")]);
-                    int minTemperature  = Integer.parseInt(attributes[Arrays.asList(header).indexOf("MnT")]);
-                    int maxTemperature  = Integer.parseInt(attributes[Arrays.asList(header).indexOf("MxT")]);
+                if (type.contains("weather")) {
+                    int id = Integer.parseInt(attributes[Arrays.asList(header).indexOf("Day")]);
+                    int minTemperature = Integer.parseInt(attributes[Arrays.asList(header).indexOf("MnT")]);
+                    int maxTemperature = Integer.parseInt(attributes[Arrays.asList(header).indexOf("MxT")]);
                     records.add(recordFactory.createRecord(id, minTemperature, maxTemperature));
                 }
-                if (type.contains("football"))
-                {
-                    String team        = attributes[Arrays.asList(header).indexOf("Team")];
-                    int goals         = Integer.parseInt(attributes[Arrays.asList(header).indexOf("Goals")]);
-                    int goalsAllowed  = Integer.parseInt(attributes[Arrays.asList(header).indexOf("Goals Allowed")]);
+                if (type.contains("football")) {
+                    String team = attributes[Arrays.asList(header).indexOf("Team")];
+                    int goals = Integer.parseInt(attributes[Arrays.asList(header).indexOf("Goals")]);
+                    int goalsAllowed = Integer.parseInt(attributes[Arrays.asList(header).indexOf("Goals Allowed")]);
                     records.add(recordFactory.createRecord(team, goals, goalsAllowed));
                 }
 
@@ -52,7 +53,7 @@ public class CSVRecordReader implements RecordReader {
 
             return records;
 
-        }catch (IOException | IllegalArgumentException ioe) {
+        } catch (IOException | IllegalArgumentException ioe) {
             ioe.printStackTrace();
         }
         return null;
