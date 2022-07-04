@@ -27,7 +27,10 @@ public final class App {
         String dayWithSmallestTempSpread = temperaturesCollection.getRecordWithMinimalDifference();
         System.out.printf("Day with smallest temperature spread : %s%n", dayWithSmallestTempSpread);
 
-        String teamWithSmallestGoalSpread = "A good team"; // Your goal analysis function call …
+        List<Record> footballRecords = temperatureReader.readRecords(args[3], args[2]);
+        RecordCollection footballCollection = new RecordCollection(footballRecords);
+
+        String teamWithSmallestGoalSpread = footballCollection.getRecordWithMinimalDifference();
         System.out.printf("Team with smallest goal spread       : %s%n", teamWithSmallestGoalSpread);
     }
 }
