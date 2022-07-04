@@ -1,10 +1,10 @@
 package de.exxcellent.challenge;
 
+import de.exxcellent.challenge.models.TemperatureRecord;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Example JUnit 5 test case.
@@ -24,7 +24,7 @@ class AppTest {
         int id = 1;
         int minTemperature = 60;
         int maxTemperature = 80;
-        TemperatureRecord record = new TemperatureRecore(id, minTemperature, maxTemperature);
+        TemperatureRecord record = new TemperatureRecord(id, minTemperature, maxTemperature);
         assertEquals(id, record.getId());
         assertEquals(minTemperature, record.getMinTemperature());
         assertEquals(maxTemperature, record.getMaxTemperature());
@@ -37,10 +37,10 @@ class AppTest {
         int maxTemperature = 80;
 
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            TemperatureRecord record = new TemperatureRecore(id, minTemperature, maxTemperature);;
+            TemperatureRecord record = new TemperatureRecord(id, minTemperature, maxTemperature);;
         });
 
-        String expectedMessage = "minTemperature too low";
+        String expectedMessage = "Temperature exceeds limits";
         String actualMessage = exception.getMessage();
 
         assertTrue(actualMessage.contains(expectedMessage));
@@ -53,10 +53,10 @@ class AppTest {
         int maxTemperature = -1200;
 
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            TemperatureRecord record = new TemperatureRecore(id, minTemperature, maxTemperature);;
+            TemperatureRecord record = new TemperatureRecord(id, minTemperature, maxTemperature);;
         });
 
-        String expectedMessage = "maxTemperature too low";
+        String expectedMessage = "Temperature exceeds limits";
         String actualMessage = exception.getMessage();
 
         assertTrue(actualMessage.contains(expectedMessage));
@@ -69,10 +69,10 @@ class AppTest {
         int maxTemperature = 80;
 
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            TemperatureRecord record = new TemperatureRecore(id, minTemperature, maxTemperature);;
+            TemperatureRecord record = new TemperatureRecord(id, minTemperature, maxTemperature);;
         });
 
-        String expectedMessage = "minTemperature too low";
+        String expectedMessage = "Temperature exceeds limits";
         String actualMessage = exception.getMessage();
 
         assertTrue(actualMessage.contains(expectedMessage));
@@ -85,26 +85,26 @@ class AppTest {
         int maxTemperature = 1200;
 
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            TemperatureRecord record = new TemperatureRecore(id, minTemperature, maxTemperature);;
+            TemperatureRecord record = new TemperatureRecord(id, minTemperature, maxTemperature);;
         });
 
-        String expectedMessage = "maxTemperature too low";
+        String expectedMessage = "Temperature exceeds limits";
         String actualMessage = exception.getMessage();
 
         assertTrue(actualMessage.contains(expectedMessage));
     }
 
     @Test
-    void createTemperatureRecord_MinTemperatureLowerThanMaxTemperature_raiseException(){
+    void createTemperatureRecord_MaxTemperatureLowerThanMinTemperature_raiseException(){
         int id = 1;
         int minTemperature = 90;
         int maxTemperature = 70;
 
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            TemperatureRecord record = new TemperatureRecore(id, minTemperature, maxTemperature);;
+            TemperatureRecord record = new TemperatureRecord(id, minTemperature, maxTemperature);;
         });
 
-        String expectedMessage = "minTemperature lower than maxTemperature";
+        String expectedMessage = "maxTemperature lower than minTemperature";
         String actualMessage = exception.getMessage();
 
         assertTrue(actualMessage.contains(expectedMessage));
