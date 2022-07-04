@@ -21,7 +21,7 @@ public final class App {
     public static void main(String... args) {
 
         CSVRecordReader temperatureReader = new CSVRecordReader();
-        List<Record> temperatureRecords = temperatureReader.readRecords(args[1], true);
+        List<Record> temperatureRecords = temperatureReader.readRecords(args[1], args[0]);
         RecordCollection temperaturesCollection = new RecordCollection(temperatureRecords);
 
         String dayWithSmallestTempSpread = temperaturesCollection.getRecordWithMinimalDifference();
