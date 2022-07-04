@@ -3,19 +3,19 @@ package de.exxcellent.challenge.models;
 import de.exxcellent.challenge.interfaces.Record;
 
 public class TemperatureRecord implements Record {
-    private int id;
+    private int day;
     private int minTemperature;
     private int maxTemperature;
 
     private static int lowerTemperatureLimit = -148;
     private static int upperTemperatureLimit =  153;
 
-    public TemperatureRecord(int id, int minTemperature, int maxTemperature) {
+    public TemperatureRecord(int day, int minTemperature, int maxTemperature) {
         if (!validateTemperatureLimits(minTemperature, maxTemperature))
             throw new IllegalArgumentException("Temperature exceeds limits");
         if (!validateTemperatureValues(minTemperature, maxTemperature))
             throw new IllegalArgumentException("maxTemperature lower than minTemperature");
-        this.id = id;
+        this.day = day;
         this.minTemperature = minTemperature;
         this.maxTemperature = maxTemperature;
     }
@@ -32,8 +32,8 @@ public class TemperatureRecord implements Record {
         return minTemperature <= maxTemperature;
     }
 
-    public int getId() {
-        return this.id;
+    public String getId() {
+        return Integer.toString(this.day);
     }
 
     public int getMinTemperature() {
