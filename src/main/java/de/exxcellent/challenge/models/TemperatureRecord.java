@@ -44,6 +44,7 @@ public class TemperatureRecord implements Record {
         return this.maxTemperature;
     }
 
+    @Override
     public int getDifference() {
         return Math.abs(this.maxTemperature-this.minTemperature);
     }
