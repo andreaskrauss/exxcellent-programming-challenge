@@ -3,6 +3,7 @@ package de.exxcellent.challenge;
 import de.exxcellent.challenge.collections.RecordCollection;
 import de.exxcellent.challenge.factories.RecordFactory;
 import de.exxcellent.challenge.interfaces.Record;
+import de.exxcellent.challenge.models.FootballRecord;
 import de.exxcellent.challenge.models.TemperatureRecord;
 import de.exxcellent.challenge.readers.CSVRecordReader;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,12 +29,13 @@ class AppTest {
         RecordFactory factory = new RecordFactory();
 
     @Test
-    void createTemperatureRecord_validTemperature_validObject(){
+    void createTemperatureRecord_validTemperature_validRecord(){
         int id = 1;
         int minTemperature = 60;
         int maxTemperature = 80;
         TemperatureRecord record = (TemperatureRecord) factory.createRecord(id, minTemperature, maxTemperature);
-        assertEquals(id, record.getId());
+        String expectedId = Integer.toString(id);
+        assertEquals(expectedId, record.getId());
         assertEquals(minTemperature, record.getMinTemperature());
         assertEquals(maxTemperature, record.getMaxTemperature());
     }
@@ -160,7 +162,7 @@ class AppTest {
         testRecords.add((TemperatureRecord) factory.createRecord(2,63, 79));
 
         CSVRecordReader reader = new CSVRecordReader();
-        List<Record> records = reader.readRecords(path, true);
+        List<Record> records = reader.readRecords(path, "--weather");
 
         assertEquals(expectedRows, records.size());
 
@@ -191,7 +193,43 @@ class AppTest {
     }
 
 
+    @Test
+    void createFootballRecord_validGoals_validRecord(){
+        String team = "Sampleteam";
+        int goals = 9;
+        int goalsAllowed = 1;
 
+        FootballRecord record = (FootballRecord) factory.createRecord(team, goals, goalsAllowed);
+        assertEquals(team, record.getId());
+        assertEquals(goals, record.getGoals());
+        assertEquals(goalsAllowed, record.getGoalsAllowed());
+    }
+
+    @Test
+    void createFootballRecord_invalidGoals_raiseException(){
+        String team = "Sampleteam";
+        int validGoals = 9;
+        int invalidGoals = -1;
+        int validGoalsAllowed = 3;
+        int invalidGoalsAllowed = -2;
+
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            factory.createRecord(team, invalidGoals, validGoalsAllowed);
+        });
+
+        String expectedMessage = "Goal counts cannot be lower than 0";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+
+        Exception exception2 = assertThrows(IllegalArgumentException.class, () -> {
+            factory.createRecord(team, validGoals, invalidGoalsAllowed);
+        });
+
+        String actualMessage2 = exception2.getMessage();
+
+        assertTrue(actualMessage2.contains(expectedMessage));
+    }
 //    @Test
 //    void aPointlessTest() {
 //        assertEquals("successful", successLabel, "My expectations were not met");
