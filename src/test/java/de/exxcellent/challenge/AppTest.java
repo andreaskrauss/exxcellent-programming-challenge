@@ -132,15 +132,13 @@ class AppTest {
     @Test
     void getDifference_differentSigns_absoluteDistance(){
         int id = 1;
-        int temperatureA = -60;
-        int temperatureB = 80;
+        int minTemperature = -60;
+        int maxTemperature = 80;
         RecordFactory factory = new RecordFactory();
-        TemperatureRecord recordA = (TemperatureRecord) factory.createRecord(id, temperatureA, temperatureB);
-        TemperatureRecord recordB = (TemperatureRecord) factory.createRecord(id, temperatureB, temperatureA);
+        TemperatureRecord record = (TemperatureRecord) factory.createRecord(id, minTemperature, maxTemperature);
 
-        int expectedResult = Math.abs(temperatureA-temperatureB);
-        assertEquals(expectedResult, recordA.getDifference());
-        assertEquals(expectedResult, recordB.getDifference());
+        int expectedResult = Math.abs(maxTemperature-minTemperature);
+        assertEquals(expectedResult, record.getDifference());
     }
 
     @Test
