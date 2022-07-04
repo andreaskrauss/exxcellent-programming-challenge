@@ -20,13 +20,11 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class AppTest {
 
-    private String successLabel = "not successful";
-
+    RecordFactory factory;
     @BeforeEach
     void setUp() {
-        successLabel = "successful";
+        factory = new RecordFactory();
     }
-        RecordFactory factory = new RecordFactory();
 
     @Test
     void createTemperatureRecord_validTemperature_validRecord(){
