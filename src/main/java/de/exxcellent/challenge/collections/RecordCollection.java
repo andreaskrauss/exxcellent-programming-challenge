@@ -26,7 +26,7 @@ public class RecordCollection {
             }
         }
         // Should nether produce null, since there should always be record
-        return Integer.toString(identifiedRecord.getId());
+        return identifiedRecord.getId();
     }
 
 
