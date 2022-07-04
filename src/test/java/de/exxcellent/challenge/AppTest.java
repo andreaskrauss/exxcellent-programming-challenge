@@ -230,6 +230,27 @@ class AppTest {
 
         assertTrue(actualMessage2.contains(expectedMessage));
     }
+
+    @Test
+    void readRecords_csv_listOfFootballRecords(){
+        int expectedRows = 2;
+        String path = "de/exxcellent/challenge/football_sample.csv";
+        List<FootballRecord> testRecords = new ArrayList<>();
+        testRecords.add((FootballRecord) factory.createRecord("Arsenal",79, 36));
+        testRecords.add((FootballRecord) factory.createRecord("Liverpool",67, 30));
+
+        CSVRecordReader reader = new CSVRecordReader();
+        List<Record> records = reader.readRecords(path, "--football");
+
+        assertEquals(expectedRows, records.size());
+
+        for(int i = 0; i < records.size(); i++){
+            FootballRecord temp = (FootballRecord) records.get(i);
+            assertEquals(testRecords.get(i).getId(), temp.getId());
+            assertEquals(testRecords.get(i).getGoals(), temp.getGoals());
+            assertEquals(testRecords.get(i).getGoalsAllowed(), temp.getGoalsAllowed());
+        }
+    }
 //    @Test
 //    void aPointlessTest() {
 //        assertEquals("successful", successLabel, "My expectations were not met");
@@ -237,7 +258,7 @@ class AppTest {
 
 //    @Test
 //    void runFootball() {
-//        App.main("--football", "football.csv");
+//        App.main("--weather", "football.csv", "--football", "football.csv");
 //    }
 
 }
