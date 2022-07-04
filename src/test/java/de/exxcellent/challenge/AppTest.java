@@ -1,7 +1,6 @@
 package de.exxcellent.challenge;
 
 import de.exxcellent.challenge.factories.RecordFactory;
-import de.exxcellent.challenge.interfaces.Record;
 import de.exxcellent.challenge.models.TemperatureRecord;
 import de.exxcellent.challenge.readers.CSVRecordReader;
 import org.junit.jupiter.api.BeforeEach;
@@ -151,15 +150,15 @@ class AppTest {
     }
 
     @Test
-    void readRecord_csv_listOfTemperatureRecords(){
+    void readRecords_csv_listOfTemperatureRecords(){
         int expectedRows = 2;
-        String path = "weather_sample.csv";
-        List<TemperatureRecord> testRecords = new ArrayList<TemperatureRecord>();
+        String path = "src/test/resources/weather_sample.csv";
+        List<TemperatureRecord> testRecords = new ArrayList<>();
         testRecords.add((TemperatureRecord) factory.createRecord(1,59, 88));
         testRecords.add((TemperatureRecord) factory.createRecord(2,63, 79));
 
-        CSVRecordReader reader = new CSVRecordReader(path);
-        List<TemperatureRecord> records = (List<TemperatureRecord>) reader.readRecords();
+        CSVRecordReader<TemperatureRecord> reader = new CSVRecordReader<>();
+        List<TemperatureRecord> records = reader.readRecords(path, true);
 
         assertEquals(expectedRows, records.size());
 

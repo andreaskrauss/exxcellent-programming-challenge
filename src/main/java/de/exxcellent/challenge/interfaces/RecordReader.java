@@ -1,5 +1,7 @@
 package de.exxcellent.challenge.interfaces;
 
-public interface RecordReader {
-    public Record readRecords();
+import java.util.List;
+
+public interface RecordReader <T>{
+    List<T> readRecords(String filepath, boolean hasHeaderline);
 }
