@@ -12,5 +12,4 @@ public class RecordFactory {
     public Record createRecord(String id, int minTemperature, int maxTemperature){
         return new FootballRecord(id, minTemperature, maxTemperature);
     }
-
 }

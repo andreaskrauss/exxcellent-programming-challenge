@@ -12,6 +12,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Reader to create records from CSV files.
+ * @author Andreas Krauss <am.krauss@web.de>
+ */
 public class CSVRecordReader implements RecordReader {
     public CSVRecordReader(){ }
     @Override
@@ -21,7 +25,6 @@ public class CSVRecordReader implements RecordReader {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
             List<Record> records = new ArrayList<>();
             RecordFactory recordFactory = new RecordFactory();
-
 
             String[] header = br.readLine().split(",");
             String line = br.readLine();
@@ -43,8 +46,6 @@ public class CSVRecordReader implements RecordReader {
                     int goalsAllowed  = Integer.parseInt(attributes[Arrays.asList(header).indexOf("Goals Allowed")]);
                     records.add(recordFactory.createRecord(team, goals, goalsAllowed));
                 }
-
-
 
                 line = br.readLine();
             }

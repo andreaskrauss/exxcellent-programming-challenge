@@ -2,10 +2,14 @@ package de.exxcellent.challenge.models;
 
 import de.exxcellent.challenge.interfaces.Record;
 
+/**
+ * Football record to store team and goal counts
+ * @author Andreas Krauss <am.krauss@web.de>
+ */
 public class FootballRecord implements Record {
-    private String name;
-    private int goals;
-    private int goalsAllowed;
+    private final String name;
+    private final int goals;
+    private final int goalsAllowed;
 
     public FootballRecord(String name, int goals, int goalsAllowed){
         this.name = name;
@@ -18,10 +22,7 @@ public class FootballRecord implements Record {
     }
 
     private boolean validateGoals(int goals, int goalsAllowed) {
-        if (goals < 0 || goalsAllowed < 0) {
-            return false;
-        }
-        return true;
+        return goals >= 0 && goalsAllowed >= 0;
     }
 
     public int getGoals(){

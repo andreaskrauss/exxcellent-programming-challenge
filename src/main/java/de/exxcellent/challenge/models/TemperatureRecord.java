@@ -2,13 +2,17 @@ package de.exxcellent.challenge.models;
 
 import de.exxcellent.challenge.interfaces.Record;
 
+/**
+ * Temperature record to store day and daily min and max Temperature
+ * @author Andreas Krauss <am.krauss@web.de>
+ */
 public class TemperatureRecord implements Record {
-    private int day;
-    private int minTemperature;
-    private int maxTemperature;
+    private final int day;
+    private final int minTemperature;
+    private final int maxTemperature;
 
-    private static int lowerTemperatureLimit = -148;
-    private static int upperTemperatureLimit =  153;
+    private final static int lowerTemperatureLimit = -148;
+    private final static int upperTemperatureLimit =  153;
 
     public TemperatureRecord(int day, int minTemperature, int maxTemperature) {
         if (!validateTemperatureLimits(minTemperature, maxTemperature))

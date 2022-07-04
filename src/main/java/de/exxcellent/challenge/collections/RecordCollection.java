@@ -3,6 +3,10 @@ package de.exxcellent.challenge.collections;
 import java.util.List;
 import de.exxcellent.challenge.interfaces.Record;
 
+/**
+ * A collection provides tools to process a list of records
+ * @author Andreas Krauss <am.krauss@web.de>
+ */
 public class RecordCollection {
 
     private final List<Record> records;
@@ -28,7 +32,4 @@ public class RecordCollection {
         // Should nether produce null, since there should always be record
         return identifiedRecord.getId();
     }
-
-
-
 }
