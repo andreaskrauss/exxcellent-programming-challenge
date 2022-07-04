@@ -43,4 +43,8 @@ public class TemperatureRecord implements Record {
     public int getMaxTemperature() {
         return this.maxTemperature;
     }
+
+    public int getDifference() {
+        return Math.abs(this.maxTemperature-this.minTemperature);
+    }
 }
