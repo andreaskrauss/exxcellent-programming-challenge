@@ -1,6 +1,8 @@
 package de.exxcellent.challenge;
 
+import de.exxcellent.challenge.collections.RecordCollection;
 import de.exxcellent.challenge.factories.RecordFactory;
+import de.exxcellent.challenge.interfaces.Record;
 import de.exxcellent.challenge.models.TemperatureRecord;
 import de.exxcellent.challenge.readers.CSVRecordReader;
 import org.junit.jupiter.api.BeforeEach;
@@ -152,23 +154,41 @@ class AppTest {
     @Test
     void readRecords_csv_listOfTemperatureRecords(){
         int expectedRows = 2;
-        String path = "src/test/resources/weather_sample.csv";
+        String path = "de/exxcellent/challenge/weather_sample.csv";
         List<TemperatureRecord> testRecords = new ArrayList<>();
         testRecords.add((TemperatureRecord) factory.createRecord(1,59, 88));
         testRecords.add((TemperatureRecord) factory.createRecord(2,63, 79));
 
-        CSVRecordReader<TemperatureRecord> reader = new CSVRecordReader<>();
-        List<TemperatureRecord> records = reader.readRecords(path, true);
+        CSVRecordReader reader = new CSVRecordReader();
+        List<Record> records = reader.readRecords(path, true);
 
         assertEquals(expectedRows, records.size());
 
         for(int i = 0; i < records.size(); i++){
-            assertEquals(testRecords.get(i).getId(), records.get(i).getId());
-            assertEquals(testRecords.get(i).getMinTemperature(), records.get(i).getMinTemperature());
-            assertEquals(testRecords.get(i).getMaxTemperature(), records.get(i).getMaxTemperature());
+            TemperatureRecord temp = (TemperatureRecord) records.get(i);
+            assertEquals(testRecords.get(i).getId(), temp.getId());
+            assertEquals(testRecords.get(i).getMinTemperature(), temp.getMinTemperature());
+            assertEquals(testRecords.get(i).getMaxTemperature(), temp.getMaxTemperature());
         }
     }
 
+    @Test
+    void getRecordWithMinimalDifference_validInput_record(){
+        List<Record> temperatureRecords = new ArrayList<>();
+        temperatureRecords.add(factory.createRecord(1,59, 88));
+        temperatureRecords.add(factory.createRecord(2,63, 79));
+        temperatureRecords.add(factory.createRecord(3,64, 85));
+
+        RecordCollection collection = new RecordCollection(temperatureRecords);
+        String id = collection.getRecordWithMinimalDifference();
+
+        assertEquals("2", id);
+    }
+
+    @Test
+    void runWeather() {
+        App.main("--weather", "de/exxcellent/challenge/weather_sample.csv");
+    }
 
 
 

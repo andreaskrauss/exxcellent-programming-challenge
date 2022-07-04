@@ -2,23 +2,22 @@ package de.exxcellent.challenge.readers;
 
 import de.exxcellent.challenge.factories.RecordFactory;
 import de.exxcellent.challenge.interfaces.RecordReader;
+import de.exxcellent.challenge.interfaces.Record;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CSVRecordReader<T> implements RecordReader<T> {
+public class CSVRecordReader implements RecordReader {
     public CSVRecordReader(){ }
     @Override
-    public List<T> readRecords(String filepath, boolean hasHeader) {
-        try (BufferedReader br = Files.newBufferedReader(Path.of(filepath),
-                StandardCharsets.US_ASCII)) {
-
-            List<T> records = new ArrayList<>();
+    public List<Record> readRecords(String filepath, boolean hasHeader) {
+        InputStream is = getClass().getClassLoader().getResourceAsStream(filepath);
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
+            List<Record> records = new ArrayList<>();
             RecordFactory recordFactory = new RecordFactory();
 
 
@@ -32,7 +31,7 @@ public class CSVRecordReader<T> implements RecordReader<T> {
                 int id              = Integer.parseInt(attributes[0]);
                 int minTemperature  = Integer.parseInt(attributes[2]);
                 int maxTemperature  = Integer.parseInt(attributes[1]);
-                records.add((T) recordFactory.createRecord(id, minTemperature, maxTemperature));
+                records.add(recordFactory.createRecord(id, minTemperature, maxTemperature));
 
                 line = br.readLine();
             }

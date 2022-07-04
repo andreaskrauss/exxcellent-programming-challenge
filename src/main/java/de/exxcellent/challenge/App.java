@@ -1,5 +1,11 @@
 package de.exxcellent.challenge;
 
+import de.exxcellent.challenge.collections.RecordCollection;
+import de.exxcellent.challenge.interfaces.Record;
+import de.exxcellent.challenge.readers.CSVRecordReader;
+
+import java.util.List;
+
 /**
  * The entry class for your solution. This class is only aimed as starting point and not intended as baseline for your software
  * design. Read: create your own classes and packages as appropriate.
@@ -14,9 +20,11 @@ public final class App {
      */
     public static void main(String... args) {
 
-        // Your preparation code …
+        CSVRecordReader temperatureReader = new CSVRecordReader();
+        List<Record> temperatureRecords = temperatureReader.readRecords(args[1], true);
+        RecordCollection temperaturesCollection = new RecordCollection(temperatureRecords);
 
-        String dayWithSmallestTempSpread = "Someday";     // Your day analysis function call …
+        String dayWithSmallestTempSpread = temperaturesCollection.getRecordWithMinimalDifference();
         System.out.printf("Day with smallest temperature spread : %s%n", dayWithSmallestTempSpread);
 
         String teamWithSmallestGoalSpread = "A good team"; // Your goal analysis function call …
