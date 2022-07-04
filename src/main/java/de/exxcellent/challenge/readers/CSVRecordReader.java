@@ -12,11 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CSVRecordReader<T> implements RecordReader<T> {
-
-    private String filepath;
     public CSVRecordReader(){ }
     @Override
-    public List<T> readRecords(String filepath, boolean hasHeaderline) {
+    public List<T> readRecords(String filepath, boolean hasHeader) {
         try (BufferedReader br = Files.newBufferedReader(Path.of(filepath),
                 StandardCharsets.US_ASCII)) {
 
@@ -26,7 +24,7 @@ public class CSVRecordReader<T> implements RecordReader<T> {
 
             String line = br.readLine();
 
-            if (hasHeaderline){ line = br.readLine(); }
+            if (hasHeader){ line = br.readLine(); }
 
             while (line != null) {
 
@@ -41,19 +39,9 @@ public class CSVRecordReader<T> implements RecordReader<T> {
 
             return records;
 
-        }catch (IOException ioe) {
+        }catch (IOException | IllegalArgumentException ioe) {
             ioe.printStackTrace();
-        }catch (IllegalArgumentException iae){
-                iae.printStackTrace();
         }
         return null;
-    }
-
-    public String getFilepath() {
-        return this.filepath;
-    }
-
-    public void setFilepath(String filepath) {
-        this.filepath = filepath;
     }
 }
