@@ -46,9 +46,8 @@ class AppTest {
         int minTemperature = -1200;
         int maxTemperature = 80;
 
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            TemperatureRecord record = (TemperatureRecord) factory.createRecord(id, minTemperature, maxTemperature);
-        });
+        Exception exception = assertThrows(IllegalArgumentException.class,
+                () -> factory.createRecord(id, minTemperature, maxTemperature));
 
         String expectedMessage = "Temperature exceeds limits";
         String actualMessage = exception.getMessage();
@@ -62,9 +61,8 @@ class AppTest {
         int minTemperature = 70;
         int maxTemperature = -1200;
 
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            TemperatureRecord record = (TemperatureRecord) factory.createRecord(id, minTemperature, maxTemperature);
-        });
+        Exception exception = assertThrows(IllegalArgumentException.class,
+                () -> factory.createRecord(id, minTemperature, maxTemperature));
 
         String expectedMessage = "Temperature exceeds limits";
         String actualMessage = exception.getMessage();
@@ -78,9 +76,8 @@ class AppTest {
         int minTemperature = 1200;
         int maxTemperature = 80;
 
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            TemperatureRecord record = (TemperatureRecord) factory.createRecord(id, minTemperature, maxTemperature);
-        });
+        Exception exception = assertThrows(IllegalArgumentException.class,
+                () -> factory.createRecord(id, minTemperature, maxTemperature));
 
         String expectedMessage = "Temperature exceeds limits";
         String actualMessage = exception.getMessage();
@@ -94,9 +91,8 @@ class AppTest {
         int minTemperature = 70;
         int maxTemperature = 1200;
 
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            TemperatureRecord record = (TemperatureRecord) factory.createRecord(id, minTemperature, maxTemperature);
-        });
+        Exception exception = assertThrows(IllegalArgumentException.class,
+                () -> factory.createRecord(id, minTemperature, maxTemperature));
 
         String expectedMessage = "Temperature exceeds limits";
         String actualMessage = exception.getMessage();
@@ -110,9 +106,8 @@ class AppTest {
         int minTemperature = 90;
         int maxTemperature = 70;
 
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            TemperatureRecord record = (TemperatureRecord) factory.createRecord(id, minTemperature, maxTemperature);
-        });
+        Exception exception = assertThrows(IllegalArgumentException.class,
+                () -> factory.createRecord(id, minTemperature, maxTemperature));
 
         String expectedMessage = "maxTemperature lower than minTemperature";
         String actualMessage = exception.getMessage();
@@ -213,18 +208,16 @@ class AppTest {
         int validGoalsAllowed = 3;
         int invalidGoalsAllowed = -2;
 
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            factory.createRecord(team, invalidGoals, validGoalsAllowed);
-        });
+        Exception exception = assertThrows(IllegalArgumentException.class,
+                () -> factory.createRecord(team, invalidGoals, validGoalsAllowed));
 
         String expectedMessage = "Goal counts cannot be lower than 0";
         String actualMessage = exception.getMessage();
 
         assertTrue(actualMessage.contains(expectedMessage));
 
-        Exception exception2 = assertThrows(IllegalArgumentException.class, () -> {
-            factory.createRecord(team, validGoals, invalidGoalsAllowed);
-        });
+        Exception exception2 = assertThrows(IllegalArgumentException.class,
+                () -> factory.createRecord(team, validGoals, invalidGoalsAllowed));
 
         String actualMessage2 = exception2.getMessage();
 
