@@ -251,10 +251,17 @@ class AppTest {
             assertEquals(testRecords.get(i).getGoalsAllowed(), temp.getGoalsAllowed());
         }
     }
-//    @Test
-//    void aPointlessTest() {
-//        assertEquals("successful", successLabel, "My expectations were not met");
-//    }
+
+    @Test
+    void getDifference_validGoalCounts_absoluteDistance(){
+        String team = "European";
+        int goals = 20;
+        int goalsAllowed = 12;
+        FootballRecord record = (FootballRecord) factory.createRecord(team, goals, goalsAllowed);
+
+        int expectedResult = Math.abs(goals-goalsAllowed);
+        assertEquals(expectedResult, record.getDifference());
+    }
 
 //    @Test
 //    void runFootball() {
