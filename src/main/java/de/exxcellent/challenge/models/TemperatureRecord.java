@@ -1,6 +1,8 @@
 package de.exxcellent.challenge.models;
 
-public class TemperatureRecord {
+import de.exxcellent.challenge.interfaces.Record;
+
+public class TemperatureRecord implements Record {
     private int id;
     private int minTemperature;
     private int maxTemperature;
@@ -27,8 +29,7 @@ public class TemperatureRecord {
     }
 
     private boolean validateTemperatureValues(int minTemperature, int maxTemperature){
-        if (maxTemperature < minTemperature){ return false; }
-        return true;
+        return minTemperature <= maxTemperature;
     }
 
     public int getId() {
