@@ -263,9 +263,9 @@ class AppTest {
         assertEquals(expectedResult, record.getDifference());
     }
 
-//    @Test
-//    void runFootball() {
-//        App.main("--weather", "football.csv", "--football", "football.csv");
-//    }
+    @Test
+    void runFootball() {
+        App.main("--weather", "de/exxcellent/challenge/weather.csv", "--football", "de/exxcellent/challenge/football.csv");
+    }
 
 }
