@@ -20,17 +20,18 @@ public final class App {
      */
     public static void main(String... args) {
 
-        CSVRecordReader temperatureReader = new CSVRecordReader();
-        List<Record> temperatureRecords = temperatureReader.readRecords(args[1], args[0]);
-        RecordCollection temperaturesCollection = new RecordCollection(temperatureRecords);
+        CSVRecordReader reader = new CSVRecordReader();
 
-        String dayWithSmallestTempSpread = temperaturesCollection.getRecordWithMinimalDifference();
-        System.out.printf("Day with smallest temperature spread : %s%n", dayWithSmallestTempSpread);
+        List<Record> records = reader.readRecords(args[1], args[0]);
+        RecordCollection collection = new RecordCollection(records);
 
-        List<Record> footballRecords = temperatureReader.readRecords(args[3], args[2]);
-        RecordCollection footballCollection = new RecordCollection(footballRecords);
-
-        String teamWithSmallestGoalSpread = footballCollection.getRecordWithMinimalDifference();
-        System.out.printf("Team with smallest goal spread       : %s%n", teamWithSmallestGoalSpread);
+        if (args[0].contains("weather")) {
+            String dayWithSmallestTempSpread = collection.getRecordWithMinimalDifference();
+            System.out.printf("Day with smallest temperature spread : %s%n", dayWithSmallestTempSpread);
+        }
+        if (args[0].contains("football")) {
+            String teamWithSmallestGoalSpread = collection.getRecordWithMinimalDifference();
+            System.out.printf("Team with smallest goal spread       : %s%n", teamWithSmallestGoalSpread);
+        }
     }
 }

@@ -16,6 +16,7 @@ public class CSVRecordReader implements RecordReader {
     public CSVRecordReader(){ }
     @Override
     public List<Record> readRecords(String filepath, String type) {
+        filepath = "de/exxcellent/challenge/" + filepath;
         InputStream is = getClass().getClassLoader().getResourceAsStream(filepath);
         try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
             List<Record> records = new ArrayList<>();

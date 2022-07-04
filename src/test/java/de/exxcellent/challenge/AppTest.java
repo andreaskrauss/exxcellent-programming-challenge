@@ -156,7 +156,7 @@ class AppTest {
     @Test
     void readRecords_csv_listOfTemperatureRecords(){
         int expectedRows = 2;
-        String path = "de/exxcellent/challenge/weather_sample.csv";
+        String path = "weather_sample.csv";
         List<TemperatureRecord> testRecords = new ArrayList<>();
         testRecords.add((TemperatureRecord) factory.createRecord(1,59, 88));
         testRecords.add((TemperatureRecord) factory.createRecord(2,63, 79));
@@ -189,7 +189,7 @@ class AppTest {
 
     @Test
     void runWeather() {
-        App.main("--weather", "de/exxcellent/challenge/weather_sample.csv");
+        App.main("--weather", "weather_sample.csv");
     }
 
 
@@ -234,7 +234,7 @@ class AppTest {
     @Test
     void readRecords_csv_listOfFootballRecords(){
         int expectedRows = 2;
-        String path = "de/exxcellent/challenge/football_sample.csv";
+        String path = "football_sample.csv";
         List<FootballRecord> testRecords = new ArrayList<>();
         testRecords.add((FootballRecord) factory.createRecord("Arsenal",79, 36));
         testRecords.add((FootballRecord) factory.createRecord("Liverpool",67, 30));
@@ -265,7 +265,7 @@ class AppTest {
 
     @Test
     void runFootball() {
-        App.main("--weather", "de/exxcellent/challenge/weather.csv", "--football", "de/exxcellent/challenge/football.csv");
+        App.main("--football", "football.csv");
     }
 
 }
